@@ -129,19 +129,11 @@
               <div class="settings-item-info">
                 <h3>About:Blank</h3>
                 <p>
-                  Cloak the site in an about:blank page and toggle about:blank on
-                  startup (enabled by default)
+                  Open the site in a new about:blank tab.
                 </p>
               </div>
               <div class="settings-item-control">
-                <div id="ab-settings">
-                  <div id="ab-settings-container">
-                    <label class="switch">
-                      <input type="checkbox" id="ab-settings-switch" class="slider-checkbox" onchange="toggleAB()" />
-                      <span class="slider-round"></span>
-                    </label>
-                  </div>
-                </div>
+                <button type="button" onclick="openAboutBlank()">Open in About:Blank</button>
               </div>
             </div>
         </section>

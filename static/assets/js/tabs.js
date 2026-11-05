@@ -497,6 +497,7 @@ document.addEventListener("DOMContentLoaded", () => {
           createNewTab(proxyUrl);
           return null;
         };
+        newIframe.contentWindow.openAboutBlankPopup = () => window.open("about:blank", "_blank");
 
         const formProto = newIframe.contentWindow.HTMLFormElement.prototype;
         for (const method of ["submit", "requestSubmit"]) {

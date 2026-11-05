@@ -438,16 +438,6 @@ select:hover {
    margin-top: -3%;
 }
 
-#ab-settings {
-   display: flex;
-   align-items: center;
-   justify-content: flex-start;
-}
-
-#ab-settings-container {
-   margin: 0;
-}
-
 #warning {
    color: var(--danger);
 }

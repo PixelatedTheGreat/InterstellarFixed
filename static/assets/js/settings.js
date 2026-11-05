@@ -171,10 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
   customCloakIcon.addEventListener("change", applyCustomCloak);
   syncCustomCloakRow();
 
-  if (store.get("ab") === "true") {
-    document.getElementById("ab-settings-switch").checked = true;
-  }
-
   const themeDropdown = document.getElementById("theme-dropdown");
   themeDropdown.value = store.get("theme") || "default";
   themeDropdown.addEventListener("change", function () {
@@ -729,23 +725,15 @@ function themeChange(selectElement) {
 }
 
 function openAboutBlank() {
-  let inFrame;
-  try {
-    inFrame = window !== top;
-  } catch {
-    inFrame = true;
-  }
-
-  if (inFrame) {
-    alert("Please open the settings page directly (not inside a frame) to use the AB popup.");
-    return;
-  }
+  const inFrame = window !== top;
   if (navigator.userAgent.includes("Firefox")) {
     alert("AB cloak is not supported in Firefox.");
     return;
   }
 
-  const popup = open("about:blank", "_blank");
+  const popup = inFrame && typeof window.openAboutBlankPopup === "function"
+    ? window.openAboutBlankPopup()
+    : open("about:blank", "_blank");
   if (!popup || popup.closed) {
     alert("Window blocked. Please allow popups for this site.");
     return;
@@ -783,12 +771,7 @@ function openAboutBlank() {
   doc.head.appendChild(script);
   doc.body.appendChild(iframe);
 
-  (window.top ?? window).location.replace(panicLink);
-}
-
-function toggleAB() {
-  const ab = store.get("ab");
-  store.set("ab", ab === "true" ? "false" : "true");
+  if (!inFrame) (window.top ?? window).location.replace(panicLink);
 }
 
 function changeEngine(dropdown) {
