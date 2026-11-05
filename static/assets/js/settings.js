@@ -171,10 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
   customCloakIcon.addEventListener("change", applyCustomCloak);
   syncCustomCloakRow();
 
-  if (store.get("ab") === "true") {
-    document.getElementById("ab-settings-switch").checked = true;
-  }
-
   const themeDropdown = document.getElementById("theme-dropdown");
   themeDropdown.value = store.get("theme") || "default";
   themeDropdown.addEventListener("change", function () {
@@ -784,11 +780,6 @@ function openAboutBlank() {
   doc.body.appendChild(iframe);
 
   (window.top ?? window).location.replace(panicLink);
-}
-
-function toggleAB() {
-  const ab = store.get("ab");
-  store.set("ab", ab === "true" ? "false" : "true");
 }
 
 function changeEngine(dropdown) {
